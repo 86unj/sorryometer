@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sorryometer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,760&family=Outfit:wght@400;560;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="booth">
+        <p class="eyebrow">Petty Crimes Division</p>
+        <h1>Sorryometer</h1>
+        <p class="lede">
+          Confess a small social crime. Receive three apologies, each more
+          unhinged than the last, and an Ideogram picture of the object you
+          should hand over.
+        </p>
+
+        <form id="case">
+          <label for="confession">What did you do?</label>
+          <textarea
+            id="confession"
+            name="confession"
+            maxlength="400"
+            rows="5"
+            placeholder="I ate the donut that had a name on it"
+            required
+          ></textarea>
+          <div class="starters" id="starters">
+            <button type="button">I ate the donut that had a name on it</button>
+            <button type="button">I hit reply all and made it everyone problem</button>
+            <button type="button">I was five minutes late and built a personality around it</button>
+            <button type="button">I took the good chair and left a wobbly one</button>
+          </div>
+          <button class="submit" type="submit">Measure my shame</button>
+          <p class="status" id="status" role="status"></p>
+        </form>
+      </section>
+
+      <section class="verdict" aria-live="polite">
+        <div class="meter" id="meter">
+          <p class="meter-label">Shame index</p>
+          <p class="score" id="score">—</p>
+          <p class="score-note" id="score-note">Waiting for a confession</p>
+          <div class="track" aria-hidden="true"><span id="fill"></span></div>
+        </div>
+        <div class="cards" id="cards" hidden>
+          <article>
+            <p>Level 2</p>
+            <h2>A normal human</h2>
+            <p class="copy" id="level2"></p>
+          </article>
+          <article>
+            <p>Level 6</p>
+            <h2>Community theater</h2>
+            <p class="copy" id="level6"></p>
+          </article>
+          <article class="loud">
+            <p>Level 10</p>
+            <h2>National holiday</h2>
+            <p class="copy" id="level10"></p>
+          </article>
+        </div>
+        <aside class="gesture" id="gesture" hidden>
+          <p>Hand this over</p>
+          <h2 id="gesture-text"></h2>
+          <img id="gesture-image" alt="" hidden />
+          <p class="image-note" id="image-note" hidden></p>
+        </aside>
+        <p class="serious" id="serious" hidden></p>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

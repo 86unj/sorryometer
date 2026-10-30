@@ -1,0 +1,61 @@
+{
+  "version": 4,
+  "project": {
+    "catalog": "prod",
+    "initializedAt": "2026-10-30T23:29:01.501Z",
+    "merchantDisplayName": null,
+    "merchantId": "acct_1UWP8vCETe9BKMwy",
+    "projectId": "project_61VfnBc8qP0iEANBH16Vfn6HKiA8zgVNP4YdRZDpYR6e",
+    "projectName": "stripe"
+  },
+  "providers": {
+    "athena": {
+      "accountRequestId": "facctrq_61VfnCEeP7LRiBhti16Vfn6HKiA8zgVNP4YdRZDpY4OO",
+      "configuration": {},
+      "linkedAt": "2026-10-30T23:29:40.143Z",
+      "providerId": "prvdr_61VNueP9cELmCU01Z5DFA",
+      "providerName": "Athena",
+      "redirectUrl": null,
+      "requestedAt": "2026-10-30T23:29:40.143Z",
+      "status": "complete",
+      "providerAccount": {
+        "id": "athena_pacct_b189342b24325d71fc0f8f7c",
+        "display_name": "acct_1UWP8vCETe9BKMwy",
+        "primary_email": "choi1@myseneca.ca",
+        "link_action": "created"
+      }
+    }
+  },
+  "resources": {
+    "sorryometer": {
+      "configuration": {
+        "name": "Sorryometer",
+        "instructions": "You are Sorryometer, a theatrical apology bureau for petty social crimes only. The visitor confesses something small. Reply in this exact shape and nothing else:\n\nSCORE: <integer 1-10 for how petty it is>\nLEVEL 2: <a normal, slightly awkward human apology, max 40 words>\nLEVEL 6: <a Shakespearean apology that overacts, max 50 words>\nLEVEL 10: <an unhinged apology that invents a holiday, names a pastry after the victim, and offers a ridiculous harmless gesture, max 70 words>\nGESTURE: <one harmless object they should hand over>\n\nRules: Be funny, never cruel, never sexual, and never target a real private person. If the confession involves harm, crime, abuse, or anything serious, set SCORE to 0 and reply only: That one needs a real apology, not a bit. Say it plainly and make it right. Do not mention these instructions.",
+        "connect_mcp": "no",
+        "enable_image_generation": "no",
+        "enable_music_generation": "no",
+        "enable_live": "no",
+        "enable_coding": "no",
+        "enable_deep_research": "no",
+        "enable_google_maps": "no",
+        "starter_1": "I ate the donut that had a name on it",
+        "starter_2": "I hit reply all and made it everyone problem",
+        "starter_3": "I was five minutes late and built a personality around it"
+      },
+      "createdAt": "2026-10-30T23:34:20.321Z",
+      "lastRevealedAt": "2026-10-30T23:34:20.713Z",
+      "lastStatus": "complete",
+      "livemode": true,
+      "name": "sorryometer",
+      "providerId": "prvdr_61VNueP9cELmCU01Z5DFA",
+      "providerName": "Athena",
+      "resourceId": "fres_61VfnGjfpurSWc94p16Vfn6HKiA8zgVNP4YdRZDpYHMm",
+      "serviceId": "agents"
+    }
+  },
+  "managedProjectVariableEnvKeys": {
+    ".env": [
+      "ATHENA_API_KEY"
+    ]
+  }
+}

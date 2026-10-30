@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "providers": {
+    "athena": {
+      "name": "Athena"
+    }
+  },
+  "resources": {
+    "sorryometer": {
+      "livemode": true,
+      "name": "sorryometer",
+      "providerName": "Athena",
+      "serviceId": "agents"
+    }
+  },
+  "environments": {
+    "default": {
+      "output": ".env",
+      "resources": [
+        {
+          "resourceName": "sorryometer"
+        }
+      ],
+      "variables": [
+        {
+          "variableName": "athena-api-key",
+          "envKey": "ATHENA_API_KEY"
+        }
+      ]
+    }
+  },
+  "variables": {
+    "athena-api-key": {
+      "name": "athena-api-key",
+      "backendId": "fprjvar_61VfnD7HEZ7qn6UB216Vfn6HKiA8zgVNP4YdRZDpY44O"
+    }
+  }
+}

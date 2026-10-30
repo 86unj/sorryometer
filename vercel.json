@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "api/confess.js": {
+      "maxDuration": 90
+    }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/public/index.html" },
+    { "source": "/((?!api/|public/).*)", "destination": "/public/$1" }
+  ]
+}
