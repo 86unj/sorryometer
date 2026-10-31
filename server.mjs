@@ -102,7 +102,11 @@ const server = createServer(async (req, res) => {
         );
         return;
       }
-      send(res, 200, JSON.stringify(await confess(payload.confession)));
+      send(
+        res,
+        200,
+        JSON.stringify(await confess(payload.confession, payload.recipient)),
+      );
       return;
     }
 

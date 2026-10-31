@@ -17,9 +17,21 @@
       <section class="booth">
         <p class="eyebrow">Petty crimes</p>
         <h1>Sorryometer</h1>
-        <p class="lede">An Ideogram postcard. The apology is on the back.</p>
+        <p class="lede">
+          An Ideogram card. The picture is on the front, the apology on the
+          other side.
+        </p>
 
         <form id="case">
+          <label for="recipient">Who is it for?</label>
+          <input
+            id="recipient"
+            name="recipient"
+            type="text"
+            maxlength="40"
+            placeholder="Sam"
+            autocomplete="name"
+          />
           <label for="confession">What did you do?</label>
           <textarea
             id="confession"
@@ -65,37 +77,169 @@
           <div class="track" aria-hidden="true"><span id="fill"></span></div>
         </div>
         <aside class="gesture" id="gesture" hidden>
-          <p>Postcard</p>
+          <p id="card-kind">Postcard</p>
+          <div class="format" role="group" aria-label="Card format">
+            <button type="button" id="use-postcard" aria-pressed="true">
+              Postcard
+            </button>
+            <button type="button" id="use-folded" aria-pressed="false">
+              Folded card
+            </button>
+          </div>
+          <p class="format-note" id="format-note">
+            One note fits on the back. A folded card opens up for the rest.
+          </p>
           <button
             type="button"
             class="postcard"
             id="postcard"
             aria-pressed="false"
+            aria-label="Show the apology"
           >
             <span class="postcard-inner">
               <span class="postcard-face postcard-front">
                 <span class="photo">
                   <img id="gesture-image" alt="" hidden />
                   <span class="photo-empty" id="image-note" hidden></span>
+                  <span class="photo-wait" id="photo-wait" hidden
+                    >Changing the color…</span
+                  >
                 </span>
                 <span class="caption" id="gesture-text"></span>
+                <span class="turn-tab">Flip</span>
               </span>
               <span class="postcard-face postcard-back">
                 <span class="back-message">
-                  <span><span id="level2"></span></span>
-                  <span><span id="level6"></span></span>
-                  <span><span id="level10"></span></span>
+                  <span class="back-to" id="back-to" hidden></span>
+                  <span class="back-kicker" id="back-kicker"></span>
+                  <span class="back-note" id="back-note"></span>
                 </span>
                 <span class="back-address">
                   <span class="stamp">SORRY</span>
-                  <span class="lines" aria-hidden="true"
+                  <span class="address-block" id="address-block" hidden>
+                    <span id="addr-name"></span>
+                    <span id="addr-street"></span>
+                    <span id="addr-cityline"></span>
+                    <span id="addr-country"></span>
+                  </span>
+                  <span class="lines" id="address-lines" aria-hidden="true"
                     ><span></span><span></span><span></span
                   ></span>
                 </span>
               </span>
             </span>
           </button>
-          <p class="flip-hint" id="flip-hint">Flip for the apology</p>
+          <button
+            type="button"
+            class="book"
+            id="book"
+            hidden
+            aria-pressed="false"
+            aria-label="Open the card"
+          >
+            <span class="book-spread">
+              <span class="inside">
+                <span class="inside-page">
+                  <span class="back-to" id="folded-to" hidden></span>
+                  <span class="back-kicker" id="folded-kicker"></span>
+                  <span class="folded-lead" id="folded-lead"></span>
+                </span>
+                <span class="inside-page inside-page-right">
+                  <span class="back-kicker" id="folded-also">Also written</span>
+                  <span class="folded-alts">
+                    <span class="alt-line" id="alt-a" hidden>
+                      <span class="alt-label" id="alt-a-label"></span>
+                      <span class="alt-copy" id="alt-a-copy"></span>
+                    </span>
+                    <span class="alt-line" id="alt-b" hidden>
+                      <span class="alt-label" id="alt-b-label"></span>
+                      <span class="alt-copy" id="alt-b-copy"></span>
+                    </span>
+                  </span>
+                </span>
+              </span>
+              <span class="cover">
+                <span class="photo">
+                  <img id="folded-image" alt="" hidden />
+                  <span class="photo-empty" id="folded-note" hidden></span>
+                  <span class="photo-wait" hidden>Changing the color…</span>
+                </span>
+                <span class="caption" id="folded-caption"></span>
+                <span class="turn-tab">Open</span>
+              </span>
+            </span>
+          </button>
+          <button type="button" class="flip-btn" id="flip-btn">
+            <span class="flip-glyph" aria-hidden="true"></span>
+            <span id="flip-hint">Flip the card</span>
+          </button>
+          <div class="envelope" id="envelope" hidden>
+            <span class="stamp">SORRY</span>
+            <span class="env-address" id="env-address"></span>
+          </div>
+          <div class="address-option">
+            <button
+              type="button"
+              class="address-toggle"
+              id="address-toggle"
+              aria-expanded="false"
+              aria-controls="address-fields"
+            >
+              Add a mailing address
+            </button>
+            <div id="address-fields" hidden>
+              <p class="address-note" id="address-note">
+                This prints on the back of the postcard.
+              </p>
+              <div class="address-grid">
+                <label class="wide" for="ship-name"
+                  >Name
+                  <input id="ship-name" maxlength="60" autocomplete="name" />
+                </label>
+                <label class="wide" for="ship-street"
+                  >Street
+                  <input
+                    id="ship-street"
+                    maxlength="80"
+                    autocomplete="address-line1"
+                  />
+                </label>
+                <label for="ship-city"
+                  >City
+                  <input
+                    id="ship-city"
+                    maxlength="40"
+                    autocomplete="address-level2"
+                  />
+                </label>
+                <label for="ship-region"
+                  >State
+                  <input
+                    id="ship-region"
+                    maxlength="30"
+                    autocomplete="address-level1"
+                  />
+                </label>
+                <label for="ship-postal"
+                  >Postal code
+                  <input
+                    id="ship-postal"
+                    maxlength="12"
+                    autocomplete="postal-code"
+                  />
+                </label>
+                <label for="ship-country"
+                  >Country
+                  <select id="ship-country" autocomplete="country">
+                    <option value="US">USA</option>
+                    <option value="CA">Canada</option>
+                    <option value="GB">UK</option>
+                    <option value="AU">Australia</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
           <p class="credit">Image by Ideogram</p>
           <div class="edit" id="edit" hidden>
             <p>Change the picture</p>
@@ -151,6 +295,7 @@
                 />
               </label>
             </div>
+            <p class="edit-status" id="edit-status" role="status"></p>
             <label class="edit-label" for="edit-note">What should change</label>
             <input
               id="edit-note"
@@ -167,7 +312,7 @@
           </div>
           <div class="mail" id="mail" hidden>
             <p>For sale</p>
-            <h2>Mail this picture</h2>
+            <h2>Mail this card</h2>
             <p class="price">$12<span> print</span></p>
             <p class="mail-copy">Standard mail $6, or overnight $18.</p>
             <button type="button" class="pay" id="pay">Mail it</button>

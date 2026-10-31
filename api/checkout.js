@@ -21,6 +21,7 @@ export default async function handler(req, res) {
       plan: payload.plan,
       gesture: payload.gesture,
       imageUrl: payload.imageUrl,
+      address: payload.address,
     });
     res.status(200).json(result);
   } catch (error) {

@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       typeof req.body === "string"
         ? JSON.parse(req.body || "{}")
         : req.body || {};
-    const result = await confess(payload.confession);
+    const result = await confess(payload.confession, payload.recipient);
     res.status(200).json(result);
   } catch (error) {
     const failure = /** @type {{ status?: number, message?: string }} */ (
