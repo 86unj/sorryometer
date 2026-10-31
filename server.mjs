@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { existsSync, readFileSync } from "node:fs";
 import { extname, join, resolve, sep } from "node:path";
-import { confess } from "./lib/booth.mjs";
+import { confess, editGesture } from "./lib/booth.mjs";
 import { createCheckout, retrieveOrder } from "./lib/checkout.mjs";
 
 const root = join(import.meta.dirname, "public");
@@ -67,9 +67,25 @@ const server = createServer(async (req, res) => {
   try {
     if (
       req.method === "POST" &&
-      (req.url === "/api/confess" || req.url === "/api/checkout")
+      (req.url === "/api/confess" ||
+        req.url === "/api/checkout" ||
+        req.url === "/api/edit")
     ) {
       const payload = JSON.parse((await readBody(req)) || "{}");
+      if (req.url === "/api/edit") {
+        send(
+          res,
+          200,
+          JSON.stringify(
+            await editGesture({
+              imageUrl: payload.imageUrl,
+              color: payload.color,
+              note: payload.note,
+            }),
+          ),
+        );
+        return;
+      }
       if (req.url === "/api/checkout") {
         const origin = `http://${req.headers.host}`;
         send(

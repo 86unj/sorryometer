@@ -39,6 +39,18 @@ const level10 = must("#level10", HTMLElement);
 const gestureText = must("#gesture-text", HTMLElement);
 const pay = must("#pay", HTMLButtonElement);
 const subscribe = must("#subscribe", HTMLButtonElement);
+const edit = must("#edit", HTMLElement);
+const swatches = must("#swatches", HTMLElement);
+const editColor = must("#edit-color", HTMLInputElement);
+const editNote = must("#edit-note", HTMLInputElement);
+const editImage = must("#edit-image", HTMLButtonElement);
+const restoreImage = must("#restore-image", HTMLButtonElement);
+const photo = must(".photo", HTMLElement);
+
+/** @type {string} */
+let chosenColor = "";
+/** @type {string} */
+let originalImageUrl = "";
 const paid = must("#paid", HTMLElement);
 const subscribed = must("#subscribed", HTMLElement);
 const canceled = must("#canceled", HTMLElement);
@@ -73,6 +85,7 @@ form.addEventListener("submit", async (event) => {
   postcard.setAttribute("aria-pressed", "false");
   flipHint.textContent = "Flip for the apology";
   mail.hidden = true;
+  edit.hidden = true;
   serious.hidden = true;
   score.textContent = "...";
   scoreNote.textContent = waiting[Math.floor(Math.random() * waiting.length)];
@@ -137,15 +150,98 @@ function render(data) {
     image.hidden = false;
     imageNote.hidden = true;
     mail.hidden = false;
+    originalImageUrl = data.imageUrl;
+    editNote.value = "";
+    clearColorChoice();
+    restoreImage.hidden = true;
+    edit.hidden = false;
   } else {
     image.removeAttribute("src");
     image.hidden = true;
     imageNote.hidden = !data.imageError;
     imageNote.textContent = data.imageError || "";
     mail.hidden = true;
+    originalImageUrl = "";
+    edit.hidden = true;
   }
   gesture.hidden = false;
 }
+
+function clearColorChoice() {
+  chosenColor = "";
+  for (const button of swatches.querySelectorAll("button")) {
+    button.setAttribute("aria-pressed", "false");
+  }
+  editColor.closest("label")?.classList.remove("is-chosen");
+}
+
+swatches.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  const button = target.closest("button");
+  if (!(button instanceof HTMLButtonElement) || !button.dataset.color) return;
+  const turningOff = button.getAttribute("aria-pressed") === "true";
+  clearColorChoice();
+  if (turningOff) return;
+  chosenColor = button.dataset.color;
+  button.setAttribute("aria-pressed", "true");
+  editColor.value = chosenColor;
+});
+
+editColor.addEventListener("input", () => {
+  for (const button of swatches.querySelectorAll("button")) {
+    button.setAttribute("aria-pressed", "false");
+  }
+  chosenColor = editColor.value;
+  editColor.closest("label")?.classList.add("is-chosen");
+});
+
+editImage.addEventListener("click", async () => {
+  const imageUrl = image.getAttribute("src");
+  const note = editNote.value.trim();
+  if (!imageUrl) return;
+  if (!chosenColor && !note) {
+    statusLine.textContent = "Pick a color or describe the change.";
+    return;
+  }
+
+  editImage.disabled = true;
+  photo.classList.add("is-editing");
+  statusLine.textContent = "Changing the picture.";
+  try {
+    const response = await fetch("/api/edit", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        imageUrl,
+        color: chosenColor,
+        note,
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok || !data.imageUrl) {
+      throw new Error(data.error || "Ideogram could not change the picture.");
+    }
+    image.src = data.imageUrl;
+    restoreImage.hidden = false;
+    statusLine.textContent = "Picture changed.";
+  } catch (error) {
+    statusLine.textContent = messageFrom(
+      error,
+      "Ideogram could not change the picture.",
+    );
+  } finally {
+    editImage.disabled = false;
+    photo.classList.remove("is-editing");
+  }
+});
+
+restoreImage.addEventListener("click", () => {
+  if (!originalImageUrl) return;
+  image.src = originalImageUrl;
+  restoreImage.hidden = true;
+  statusLine.textContent = "First picture.";
+});
 
 postcard.addEventListener("click", () => {
   const flipped = postcard.classList.toggle("is-flipped");

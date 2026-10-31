@@ -97,6 +97,74 @@
           </button>
           <p class="flip-hint" id="flip-hint">Flip for the apology</p>
           <p class="credit">Image by Ideogram</p>
+          <div class="edit" id="edit" hidden>
+            <p>Change the picture</p>
+            <div class="swatches" id="swatches">
+              <button
+                type="button"
+                data-color="#c5364e"
+                style="background: #c5364e"
+                aria-label="Berry"
+                aria-pressed="false"
+              ></button>
+              <button
+                type="button"
+                data-color="#e07a3d"
+                style="background: #e07a3d"
+                aria-label="Orange"
+                aria-pressed="false"
+              ></button>
+              <button
+                type="button"
+                data-color="#ffcf70"
+                style="background: #ffcf70"
+                aria-label="Butter"
+                aria-pressed="false"
+              ></button>
+              <button
+                type="button"
+                data-color="#2f6f4e"
+                style="background: #2f6f4e"
+                aria-label="Green"
+                aria-pressed="false"
+              ></button>
+              <button
+                type="button"
+                data-color="#3d5a80"
+                style="background: #3d5a80"
+                aria-label="Blue"
+                aria-pressed="false"
+              ></button>
+              <button
+                type="button"
+                data-color="#4c2142"
+                style="background: #4c2142"
+                aria-label="Plum"
+                aria-pressed="false"
+              ></button>
+              <label class="color-pick">
+                <input
+                  id="edit-color"
+                  type="color"
+                  value="#c5364e"
+                  aria-label="Custom color"
+                />
+              </label>
+            </div>
+            <label class="edit-label" for="edit-note">What should change</label>
+            <input
+              id="edit-note"
+              type="text"
+              maxlength="200"
+              placeholder="Slate blue knit, same shape"
+            />
+            <button type="button" class="submit" id="edit-image">
+              Change it
+            </button>
+            <button type="button" class="restore" id="restore-image" hidden>
+              First picture
+            </button>
+          </div>
           <div class="mail" id="mail" hidden>
             <p>For sale</p>
             <h2>Mail this picture</h2>

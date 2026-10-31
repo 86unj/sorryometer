@@ -142,6 +142,7 @@ textarea {
 
 .meter-label,
 .gesture > p:first-child,
+.edit > p:first-child,
 .mail > p:first-child {
   margin: 0;
   text-transform: uppercase;
@@ -263,6 +264,10 @@ h2 {
   display: none;
 }
 
+.photo.is-editing img {
+  opacity: 0.4;
+}
+
 .photo-empty {
   display: grid;
   place-items: center;
@@ -349,6 +354,86 @@ h2 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 700;
+}
+
+.edit {
+  margin-top: 14px;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.swatches button,
+.color-pick {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  box-shadow: inset 0 0 0 1px rgba(36, 20, 15, 0.28);
+  padding: 0;
+}
+
+.swatches button {
+  cursor: pointer;
+}
+
+.swatches button[aria-pressed="true"],
+.color-pick.is-chosen {
+  border-color: var(--ink);
+}
+
+.color-pick {
+  display: block;
+  overflow: hidden;
+  margin: 0;
+}
+
+.color-pick input {
+  width: 40px;
+  height: 40px;
+  margin: -6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.edit-label {
+  margin-top: 4px;
+}
+
+.edit input[type="text"] {
+  width: 100%;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font: inherit;
+  background: white;
+}
+
+.edit .submit {
+  margin-top: 10px;
+}
+
+.restore {
+  margin-top: 8px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.restore[hidden] {
+  display: none;
 }
 .mail {
   margin-top: 16px;
