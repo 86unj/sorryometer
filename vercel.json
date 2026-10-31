@@ -9,9 +9,5 @@
     "api/order.js": {
       "maxDuration": 30
     }
-  },
-  "rewrites": [
-    { "source": "/", "destination": "/public/index.html" },
-    { "source": "/((?!api/|public/).*)", "destination": "/public/$1" }
-  ]
+  }
 }

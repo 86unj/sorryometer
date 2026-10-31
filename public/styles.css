@@ -383,6 +383,8 @@ h2 {
 }
 .plan {
   margin-top: 18px;
+  background: var(--plum);
+  color: var(--cream);
 }
 .pay {
   margin-top: 14px;
