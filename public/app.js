@@ -312,12 +312,9 @@ function placeText(node, text, maxPx, minPx) {
       high = mid - 1;
     }
   }
-  node.textContent =
-    best >= words.length || best === 0
-      ? best === 0
-        ? "…"
-        : clean
-      : `${words.slice(0, best).join(" ")}…`;
+  if (best === 0) node.textContent = "…";
+  else if (best >= words.length) node.textContent = clean;
+  else node.textContent = `${words.slice(0, best).join(" ")}…`;
   return { trimmed: best < words.length, skipped: false };
 }
 
