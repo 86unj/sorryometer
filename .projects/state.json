@@ -3,6 +3,9 @@
   "providers": {
     "athena": {
       "name": "Athena"
+    },
+    "stripe": {
+      "name": "stripe"
     }
   },
   "resources": {
@@ -11,6 +14,12 @@
       "name": "sorryometer",
       "providerName": "Athena",
       "serviceId": "agents"
+    },
+    "stripe-sandbox": {
+      "livemode": true,
+      "name": "stripe-sandbox",
+      "providerName": "stripe",
+      "serviceId": "sandbox"
     }
   },
   "environments": {
@@ -19,12 +28,19 @@
       "resources": [
         {
           "resourceName": "sorryometer"
+        },
+        {
+          "resourceName": "stripe-sandbox"
         }
       ],
       "variables": [
         {
           "variableName": "athena-api-key",
           "envKey": "ATHENA_API_KEY"
+        },
+        {
+          "variableName": "ideogram-api-key",
+          "envKey": "IDEOGRAM_API_KEY"
         }
       ]
     }
@@ -33,6 +49,10 @@
     "athena-api-key": {
       "name": "athena-api-key",
       "backendId": "fprjvar_61VfnD7HEZ7qn6UB216Vfn6HKiA8zgVNP4YdRZDpY44O"
+    },
+    "ideogram-api-key": {
+      "name": "ideogram-api-key",
+      "backendId": "fprjvar_61VfnlQFnFYRTcrR916Vfn6HKiA8zgVNP4YdRZDpYBeq"
     }
   }
 }

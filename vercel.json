@@ -2,6 +2,12 @@
   "functions": {
     "api/confess.js": {
       "maxDuration": 90
+    },
+    "api/checkout.js": {
+      "maxDuration": 30
+    },
+    "api/order.js": {
+      "maxDuration": 30
     }
   },
   "rewrites": [

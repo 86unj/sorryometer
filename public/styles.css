@@ -12,7 +12,9 @@
   font-family: Outfit, sans-serif;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -28,14 +30,19 @@ main {
   padding: 36px 0 56px;
 }
 
-.booth, .verdict {
+.booth,
+.verdict {
+  min-width: 0;
   background: rgba(255, 248, 238, 0.78);
   border: 1px solid var(--line);
   border-radius: 28px;
   box-shadow: 0 20px 50px rgba(76, 33, 66, 0.08);
 }
 
-.booth { padding: 32px; }
+.booth {
+  container-type: inline-size;
+  padding: 28px 24px;
+}
 
 .eyebrow {
   margin: 0 0 8px;
@@ -46,7 +53,9 @@ main {
   color: var(--berry);
 }
 
-h1, h2, .score {
+h1,
+h2,
+.score {
   font-family: Fraunces, serif;
   font-weight: 760;
   letter-spacing: -0.04em;
@@ -54,13 +63,15 @@ h1, h2, .score {
 
 h1 {
   margin: 0;
-  font-size: clamp(3.4rem, 7vw, 5.4rem);
-  line-height: 0.85;
+  max-width: 100%;
+  font-size: clamp(2rem, 10cqi, 3rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
 }
 
 .lede {
-  font-size: 1.05rem;
-  line-height: 1.45;
+  font-size: 1rem;
+  line-height: 1.4;
 }
 
 label {
@@ -86,7 +97,8 @@ textarea {
   margin: 12px 0 18px;
 }
 
-.starters button, .submit {
+.starters button,
+.submit {
   font: inherit;
   cursor: pointer;
 }
@@ -109,7 +121,10 @@ textarea {
   font-weight: 700;
 }
 
-.submit:disabled { opacity: 0.55; cursor: wait; }
+.submit:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
 
 .status {
   min-height: 1.4em;
@@ -117,11 +132,17 @@ textarea {
   font-weight: 560;
 }
 
-.verdict { padding: 28px; }
+.verdict {
+  padding: 28px;
+}
 
-.meter { margin-bottom: 18px; }
+.meter {
+  margin-bottom: 18px;
+}
 
-.meter-label, .cards p, .gesture p {
+.meter-label,
+.gesture > p:first-child,
+.mail > p:first-child {
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -135,7 +156,9 @@ textarea {
   line-height: 0.9;
 }
 
-.score-note { margin-top: 0; }
+.score-note {
+  margin-top: 0;
+}
 
 .track {
   height: 14px;
@@ -153,35 +176,244 @@ textarea {
   transition: width 0.4s ease;
 }
 
-.cards {
-  display: grid;
-  gap: 12px;
-}
-
-article, .gesture, .serious {
+.gesture,
+.serious {
   border-radius: 20px;
   padding: 16px 18px;
-  background: white;
 }
 
-article.loud {
-  background: var(--plum);
-  color: #fff4e4;
+h2 {
+  margin: 4px 0 8px;
+  font-size: 1.6rem;
 }
 
-h2 { margin: 4px 0 8px; font-size: 1.6rem; }
+.gesture {
+  margin-top: 12px;
+  background: var(--butter);
+}
 
-.copy { margin: 0; line-height: 1.45; }
-
-.gesture { margin-top: 12px; background: var(--butter); }
-.gesture h2 { margin-bottom: 8px; }
-.gesture img {
+.postcard {
+  position: relative;
   display: block;
-  width: min(100%, 420px);
-  border-radius: 16px;
-  background: white;
+  width: 100%;
+  margin-top: 10px;
+  aspect-ratio: 3 / 2;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  perspective: 1200px;
 }
-.image-note { margin: 8px 0 0; font-size: 0.9rem; }
+
+.postcard-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+.postcard.is-flipped .postcard-inner {
+  transform: rotateY(180deg);
+}
+
+.postcard-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #fffdf8;
+  box-shadow: 0 12px 28px rgba(36, 20, 15, 0.16);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.postcard-front {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 0;
+}
+
+.photo {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #f4e4cc;
+}
+
+.photo img,
+.photo-empty {
+  width: 100%;
+  height: 100%;
+}
+
+.photo img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo img[hidden],
+.photo-empty[hidden] {
+  display: none;
+}
+
+.photo-empty {
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  text-align: center;
+}
+
+.caption {
+  display: block;
+  padding: 6px 4px 8px;
+  font-family: Caveat, cursive;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.postcard-back {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  transform: rotateY(180deg);
+  background: #fffaf3;
+}
+
+.back-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px 12px;
+  overflow: auto;
+  font-family: Caveat, cursive;
+  font-size: 1.2rem;
+  line-height: 1.05;
+}
+
+.back-address {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 14px 12px 14px 14px;
+  border-left: 1px solid #e4d0b0;
+}
+
+.stamp {
+  align-self: end;
+  display: grid;
+  width: 52px;
+  height: 62px;
+  place-items: center;
+  border: 2px dashed var(--berry);
+  color: var(--berry);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  transform: rotate(8deg);
+}
+
+.lines {
+  display: grid;
+  align-content: center;
+  flex: 1;
+  gap: 16px;
+}
+
+.lines span {
+  display: block;
+  height: 1px;
+  background: rgba(36, 20, 15, 0.28);
+}
+
+.flip-hint {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .postcard-inner {
+    transition: none;
+  }
+}
+.credit {
+  margin: 10px 0 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.mail {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--ink);
+  color: var(--cream);
+}
+.mail p {
+  margin: 0;
+}
+.mail h2 {
+  margin: 4px 0 8px;
+  font-size: 1.7rem;
+}
+.mail-copy {
+  margin-top: 8px;
+  line-height: 1.4;
+}
+.price {
+  font-family: Fraunces, serif;
+  font-size: 2.2rem;
+  letter-spacing: -0.04em;
+}
+.price span {
+  font-family: Outfit, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+.mail .pay-note {
+  color: rgba(255, 244, 228, 0.78);
+}
+.plan {
+  margin-top: 18px;
+}
+.pay {
+  margin-top: 14px;
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 16px;
+  background: var(--butter);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pay:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.pay-note {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+}
+.banner {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #e7f6ea;
+  font-weight: 560;
+}
+.banner.canceled {
+  background: #fff1d6;
+}
 
 .serious {
   background: var(--ink);
@@ -190,6 +422,8 @@ h2 { margin: 4px 0 8px; font-size: 1.6rem; }
 }
 
 @media (max-width: 800px) {
-  main { grid-template-columns: 1fr; padding-top: 16px; }
-  h1 { font-size: 3.6rem; }
+  main {
+    grid-template-columns: 1fr;
+    padding-top: 16px;
+  }
 }

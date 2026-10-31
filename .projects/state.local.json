@@ -51,11 +51,24 @@
       "providerName": "Athena",
       "resourceId": "fres_61VfnGjfpurSWc94p16Vfn6HKiA8zgVNP4YdRZDpYHMm",
       "serviceId": "agents"
+    },
+    "stripe-sandbox": {
+      "configuration": {},
+      "createdAt": "2026-10-31T00:04:47.843Z",
+      "lastRevealedAt": "2026-10-31T00:04:48.249Z",
+      "lastStatus": "complete",
+      "livemode": true,
+      "name": "stripe-sandbox",
+      "providerId": "prvdr_stripe_native",
+      "providerName": "stripe",
+      "resourceId": "fres_61VfnkDl8mcZgfyqx16Vfn6HKiA8zgVNP4YdRZDpYIfg",
+      "serviceId": "sandbox"
     }
   },
   "managedProjectVariableEnvKeys": {
     ".env": [
-      "ATHENA_API_KEY"
+      "ATHENA_API_KEY",
+      "IDEOGRAM_API_KEY"
     ]
   }
 }

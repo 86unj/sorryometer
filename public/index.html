@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,760&family=Outfit:wght@400;560;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,560;9..144,760&family=Outfit:wght@400;560;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/styles.css" />
@@ -15,13 +15,9 @@
   <body>
     <main>
       <section class="booth">
-        <p class="eyebrow">Petty Crimes Division</p>
+        <p class="eyebrow">Petty crimes</p>
         <h1>Sorryometer</h1>
-        <p class="lede">
-          Confess a small social crime. Receive three apologies, each more
-          unhinged than the last, and an Ideogram picture of the object you
-          should hand over.
-        </p>
+        <p class="lede">An Ideogram postcard. The apology is on the back.</p>
 
         <form id="case">
           <label for="confession">What did you do?</label>
@@ -29,50 +25,86 @@
             id="confession"
             name="confession"
             maxlength="400"
-            rows="5"
-            placeholder="I ate the donut that had a name on it"
+            rows="3"
+            placeholder="Ate the named donut"
             required
           ></textarea>
           <div class="starters" id="starters">
-            <button type="button">I ate the donut that had a name on it</button>
-            <button type="button">I hit reply all and made it everyone problem</button>
-            <button type="button">I was five minutes late and built a personality around it</button>
-            <button type="button">I took the good chair and left a wobbly one</button>
+            <button type="button">Ate the named donut</button>
+            <button type="button">Hit reply all</button>
+            <button type="button">Showed up late</button>
+            <button type="button">Took the good chair</button>
           </div>
           <button class="submit" type="submit">Measure my shame</button>
           <p class="status" id="status" role="status"></p>
         </form>
+
+        <aside class="mail plan">
+          <p>Subscribe</p>
+          <h2>Bureau</h2>
+          <p class="price">$8<span>/month</span></p>
+          <p class="mail-copy">A new postcard every month.</p>
+          <button type="button" class="pay" id="subscribe">Subscribe</button>
+        </aside>
       </section>
 
       <section class="verdict" aria-live="polite">
+        <p class="banner" id="subscribed" hidden>
+          Subscribed. Test mode, so nothing is billed.
+        </p>
+        <p class="banner" id="paid" hidden>
+          Print ordered. Test mode, so nothing ships.
+        </p>
+        <p class="banner canceled" id="canceled" hidden>
+          Canceled. Nothing charged.
+        </p>
         <div class="meter" id="meter">
           <p class="meter-label">Shame index</p>
           <p class="score" id="score">—</p>
-          <p class="score-note" id="score-note">Waiting for a confession</p>
+          <p class="score-note" id="score-note">Waiting</p>
           <div class="track" aria-hidden="true"><span id="fill"></span></div>
         </div>
-        <div class="cards" id="cards" hidden>
-          <article>
-            <p>Level 2</p>
-            <h2>A normal human</h2>
-            <p class="copy" id="level2"></p>
-          </article>
-          <article>
-            <p>Level 6</p>
-            <h2>Community theater</h2>
-            <p class="copy" id="level6"></p>
-          </article>
-          <article class="loud">
-            <p>Level 10</p>
-            <h2>National holiday</h2>
-            <p class="copy" id="level10"></p>
-          </article>
-        </div>
         <aside class="gesture" id="gesture" hidden>
-          <p>Hand this over</p>
-          <h2 id="gesture-text"></h2>
-          <img id="gesture-image" alt="" hidden />
-          <p class="image-note" id="image-note" hidden></p>
+          <p>Postcard</p>
+          <button
+            type="button"
+            class="postcard"
+            id="postcard"
+            aria-pressed="false"
+          >
+            <span class="postcard-inner">
+              <span class="postcard-face postcard-front">
+                <span class="photo">
+                  <img id="gesture-image" alt="" hidden />
+                  <span class="photo-empty" id="image-note" hidden></span>
+                </span>
+                <span class="caption" id="gesture-text"></span>
+              </span>
+              <span class="postcard-face postcard-back">
+                <span class="back-message">
+                  <span><span id="level2"></span></span>
+                  <span><span id="level6"></span></span>
+                  <span><span id="level10"></span></span>
+                </span>
+                <span class="back-address">
+                  <span class="stamp">SORRY</span>
+                  <span class="lines" aria-hidden="true"
+                    ><span></span><span></span><span></span
+                  ></span>
+                </span>
+              </span>
+            </span>
+          </button>
+          <p class="flip-hint" id="flip-hint">Flip for the apology</p>
+          <p class="credit">Image by Ideogram</p>
+          <div class="mail" id="mail" hidden>
+            <p>For sale</p>
+            <h2>Mail this picture</h2>
+            <p class="price">$12<span> print</span></p>
+            <p class="mail-copy">Standard mail $6, or overnight $18.</p>
+            <button type="button" class="pay" id="pay">Mail it</button>
+            <p class="pay-note">Test card 4242 4242 4242 4242</p>
+          </div>
         </aside>
         <p class="serious" id="serious" hidden></p>
       </section>
